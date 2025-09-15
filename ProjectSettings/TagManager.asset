@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Ground
+  - Platform
+  - Enemy
+  - EnemyBlock
+  - Coin
+  - Health
+  - Diamond
+  - SilverCoin
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Ground
+  - Background
+  - Enemy
+  - EnemyBlock
+  - Player
+  - Platform
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: BGImage
+    uniqueID: 200365503
+    locked: 0
+  - name: Background
+    uniqueID: 2975845801
+    locked: 0
+  - name: Water Reflect Backgroound
+    uniqueID: 241693821
+    locked: 0
+  - name: BackPalms
+    uniqueID: 442253369
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 3140728353
+    locked: 0
+  - name: Additional Water Bottom
+    uniqueID: 411518639
+    locked: 0
+  m_RenderingLayers:
+  - Default
