@@ -2,17 +2,22 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
+
     [SerializeField] private Transform target1, target2;
     [SerializeField] private float moveSpeed = 2.0f;
 
     private Transform currentTarget;
     void Start()
     {
+
         currentTarget = target1;
+
     }
+
 
     void FixedUpdate()
     {
+
         if (transform.position == target1.position)
         {
             currentTarget = target2;
@@ -24,6 +29,27 @@ public class MovingPlatform : MonoBehaviour
 
 
         transform.position = Vector2.MoveTowards(transform.position, currentTarget.position, moveSpeed * Time.deltaTime);
+
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.transform.SetParent(transform);
+        }
+    }
+
+    // && other.transform.position.y > transform.position.y
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.transform.SetParent(null);
+        }
+    }
+
 
 }

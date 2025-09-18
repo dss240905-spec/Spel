@@ -12,6 +12,7 @@ TagManager:
   - Health
   - Diamond
   - SilverCoin
+  - Foreground
   layers:
   - Default
   - TransparentFX
@@ -66,6 +67,9 @@ TagManager:
     locked: 0
   - name: Additional Water Bottom
     uniqueID: 411518639
+    locked: 0
+  - name: Ground
+    uniqueID: 705698721
     locked: 0
   m_RenderingLayers:
   - Default

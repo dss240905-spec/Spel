@@ -1,49 +1,40 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class QuestChecker : MonoBehaviour
 {
-    [SerializeField] private GameObject dialogueBox, finishText, incompleteText;
     [SerializeField] private int questGoal = 20;
     [SerializeField] private int levelToLoad;
-
-    private bool levelIsLoading = false;
-  
-
+    [SerializeField] private Animator doorAnimator;
     
+    // Remove the openAnimationName since we'll use a trigger instead
+    private bool levelIsLoading = false;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-         if (other.CompareTag("Player"))
-         {
-            if (other.GetComponent<PlayerMovements>().coinsCollected >= 20)
+        if (other.CompareTag("Player") && !levelIsLoading)
+        {
+            PlayerMovements player = other.GetComponent<PlayerMovements>();
+            if (player != null && player.coinsCollected >= questGoal)
             {
-               dialogueBox.SetActive(true);
-               finishText.SetActive(true);
-                SceneManager.LoadScene(levelToLoad);
-                Invoke("LoadNextLevel", 20.0f);
+                OpenDoor();
                 levelIsLoading = true;
-               //TODO: ChangeLevel
+                Invoke("LoadNextLevel", 2.0f);
             }
-            else
-            {
-                dialogueBox.SetActive(true);
-                incompleteText.SetActive(true);
-            }
-         }
-        
+        }
     }
+
+    private void OpenDoor()
+    {
+        if (doorAnimator != null)
+        {
+            // Use SetTrigger instead of Play to trigger the animation transition
+            doorAnimator.SetTrigger("OpenDoor");
+        }
+    }
+
     private void LoadNextLevel()
     {
         SceneManager.LoadScene(levelToLoad);
     }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player") && !levelIsLoading)
-        {
-            dialogueBox.SetActive(false);
-            finishText.SetActive(false);
-            incompleteText.SetActive(false);
-        }
-    }
 }
-
