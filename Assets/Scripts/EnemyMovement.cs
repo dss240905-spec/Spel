@@ -41,18 +41,24 @@ public class EnemyMovement : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerMovements>().TakeDamage(damageGiven);
-            if(other.transform.position.x > transform.position.x)
-            {
-                other.gameObject.GetComponent<PlayerMovements>().TakeKnockBack(knockbackForce, upwardForce);
-            }
-            else
-            {
-                other.gameObject.GetComponent<PlayerMovements>().TakeKnockBack(-knockbackForce, upwardForce);
-            }
-        }
+             PlayerAttacks playerAttack = other.gameObject.GetComponent<PlayerAttacks>();
 
-    }
+ // Only damage player if they are NOT attacking
+ if (playerAttack == null || !playerAttack.IsAttacking)
+ {
+     other.gameObject.GetComponent<PlayerMovements>().TakeDamage(damageGiven);
+
+     if (other.transform.position.x > transform.position.x)
+     {
+         other.gameObject.GetComponent<PlayerMovements>().TakeKnockBack(knockbackForce, upwardForce);
+     }
+     else
+     {
+         other.gameObject.GetComponent<PlayerMovements>().TakeKnockBack(-knockbackForce, upwardForce);
+        }
+       }
+      }
+     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player")) 
