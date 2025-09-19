@@ -1,0 +1,1053 @@
+fileFormatVersion: 2
+guid: 6696258cff9e04f9fb8a80ecd0a52398
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5558959788762320937
+    second: Isometric_Pipes_0
+  - first:
+      213: -8263060616842188898
+    second: Isometric_Pipes_1
+  - first:
+      213: -3640246007818036079
+    second: Isometric_Pipes_2
+  - first:
+      213: 3032160244498738640
+    second: Isometric_Pipes_3
+  - first:
+      213: 5118198209391192400
+    second: Isometric_Pipes_4
+  - first:
+      213: -1717238203508975539
+    second: Isometric_Pipes_5
+  - first:
+      213: -1617480952678996911
+    second: Isometric_Pipes_6
+  - first:
+      213: -851594811384049596
+    second: Isometric_Pipes_7
+  - first:
+      213: -6447137682720642707
+    second: Isometric_Pipes_8
+  - first:
+      213: -5719415721127186001
+    second: Isometric_Pipes_9
+  - first:
+      213: 2607792740428443268
+    second: Isometric_Pipes_10
+  - first:
+      213: -4672925689509724701
+    second: Isometric_Pipes_11
+  - first:
+      213: -5050150045141077686
+    second: Isometric_Pipes_12
+  - first:
+      213: -3932820371204767856
+    second: Isometric_Pipes_13
+  - first:
+      213: -6868770981953710559
+    second: Isometric_Pipes_14
+  - first:
+      213: 9115382236436124034
+    second: Isometric_Pipes_15
+  - first:
+      213: -6456311604857255289
+    second: Isometric_Pipes_16
+  - first:
+      213: -1229155659723896314
+    second: Isometric_Pipes_17
+  - first:
+      213: -7362312758303479603
+    second: Isometric_Pipes_18
+  - first:
+      213: 3533544773564534439
+    second: Isometric_Pipes_19
+  - first:
+      213: -1684280326355335215
+    second: Isometric_Pipes_20
+  - first:
+      213: -5134303011052954754
+    second: Isometric_Pipes_21
+  - first:
+      213: -3931892500529106194
+    second: Isometric_Pipes_22
+  - first:
+      213: 2393763319095011570
+    second: Isometric_Pipes_23
+  - first:
+      213: 5595322934506594409
+    second: Isometric_Pipes_24
+  - first:
+      213: 6671039653139082476
+    second: Isometric_Pipes_25
+  - first:
+      213: 7037701228011705797
+    second: Isometric_Pipes_26
+  - first:
+      213: 76749420351440423
+    second: Isometric_Pipes_27
+  - first:
+      213: 6614581859988616305
+    second: Isometric_Pipes_28
+  - first:
+      213: 9015802630596752115
+    second: Isometric_Pipes_29
+  - first:
+      213: 8492825044286960385
+    second: Isometric_Pipes_30
+  - first:
+      213: -5325373834925609292
+    second: Isometric_Pipes_31
+  - first:
+      213: 4386785337069372032
+    second: Isometric_Pipes_32
+  - first:
+      213: 2339893967724393258
+    second: Isometric_Pipes_33
+  - first:
+      213: 4525505848390155398
+    second: Isometric_Pipes_34
+  - first:
+      213: -4983126586548461443
+    second: Isometric_Pipes_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Isometric_Pipes_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 481
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7df2426568b9ad2b0800000000000000
+      internalID: -5558959788762320937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_1
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 481
+        width: 61
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e97e9970626b35d80800000000000000
+      internalID: -8263060616842188898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_2
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 481
+        width: 56
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19cd8f0fa8f3b7dc0800000000000000
+      internalID: -3640246007818036079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_3
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 481
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dda8636da5641a20800000000000000
+      internalID: 3032160244498738640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 449
+        width: 90
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0596dc0772e770740800000000000000
+      internalID: 5118198209391192400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_5
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 449
+        width: 56
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d481e15c3f42b28e0800000000000000
+      internalID: -1717238203508975539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_6
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 449
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 154ab90b4ad8d89e0800000000000000
+      internalID: -1617480952678996911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 417
+        width: 192
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44053eee7078e24f0800000000000000
+      internalID: -851594811384049596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 385
+        width: 192
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d69a66b9f6a2786a0800000000000000
+      internalID: -6447137682720642707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_9
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 353
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa1fd6354bd80a0b0800000000000000
+      internalID: -5719415721127186001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_10
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 353
+        width: 61
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48e64154eadb03420800000000000000
+      internalID: 2607792740428443268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_11
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 353
+        width: 56
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3edb9f6f7de662fb0800000000000000
+      internalID: -4672925689509724701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_12
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 353
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4171f07a434ae9b0800000000000000
+      internalID: -5050150045141077686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 321
+        width: 90
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09f7be895b0db69c0800000000000000
+      internalID: -3932820371204767856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_14
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 321
+        width: 56
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12653292f293da0a0800000000000000
+      internalID: -6868770981953710559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_15
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 321
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2815ea249d7508e70800000000000000
+      internalID: 9115382236436124034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 289
+        width: 192
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78a40496dc29666a0800000000000000
+      internalID: -6456311604857255289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 257
+        width: 192
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60a0f78907921fee0800000000000000
+      internalID: -1229155659723896314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_18
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 225
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc8aef3bd8fc3d990800000000000000
+      internalID: -7362312758303479603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_19
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 225
+        width: 61
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ae8042004ca90130800000000000000
+      internalID: 3533544773564534439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_20
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 225
+        width: 56
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d7496587fb30a8e0800000000000000
+      internalID: -1684280326355335215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_21
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 225
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7b58f83d9a4fb8b0800000000000000
+      internalID: -5134303011052954754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 193
+        width: 90
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee2b0f25a9c1f69c0800000000000000
+      internalID: -3931892500529106194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_23
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 193
+        width: 56
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f8a4075e0b583120800000000000000
+      internalID: 2393763319095011570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_24
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 193
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 960acda409496ad40800000000000000
+      internalID: 5595322934506594409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 161
+        width: 192
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cec66e7483b449c50800000000000000
+      internalID: 6671039653139082476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 129
+        width: 192
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c5d7f2caffeaa160800000000000000
+      internalID: 7037701228011705797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_27
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 97
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 726c3c0f03ba01100800000000000000
+      internalID: 76749420351440423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_28
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 97
+        width: 61
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1743d56f727bbcb50800000000000000
+      internalID: 6614581859988616305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_29
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 97
+        width: 56
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f270c989b09e1d70800000000000000
+      internalID: 9015802630596752115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_30
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 97
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 103f34081639cd570800000000000000
+      internalID: 8492825044286960385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_31
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 65
+        width: 90
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4be691156b87816b0800000000000000
+      internalID: -5325373834925609292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_32
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 65
+        width: 56
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08289e9950ef0ec30800000000000000
+      internalID: 4386785337069372032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_33
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 65
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a23ba469a29f87020800000000000000
+      internalID: 2339893967724393258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_34
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 33
+        width: 192
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68c7f3a8793ddce30800000000000000
+      internalID: 4525505848390155398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Isometric_Pipes_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 192
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7069f175c068dab0800000000000000
+      internalID: -4983126586548461443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Isometric_Pipes_0: -5558959788762320937
+      Isometric_Pipes_1: -8263060616842188898
+      Isometric_Pipes_10: 2607792740428443268
+      Isometric_Pipes_11: -4672925689509724701
+      Isometric_Pipes_12: -5050150045141077686
+      Isometric_Pipes_13: -3932820371204767856
+      Isometric_Pipes_14: -6868770981953710559
+      Isometric_Pipes_15: 9115382236436124034
+      Isometric_Pipes_16: -6456311604857255289
+      Isometric_Pipes_17: -1229155659723896314
+      Isometric_Pipes_18: -7362312758303479603
+      Isometric_Pipes_19: 3533544773564534439
+      Isometric_Pipes_2: -3640246007818036079
+      Isometric_Pipes_20: -1684280326355335215
+      Isometric_Pipes_21: -5134303011052954754
+      Isometric_Pipes_22: -3931892500529106194
+      Isometric_Pipes_23: 2393763319095011570
+      Isometric_Pipes_24: 5595322934506594409
+      Isometric_Pipes_25: 6671039653139082476
+      Isometric_Pipes_26: 7037701228011705797
+      Isometric_Pipes_27: 76749420351440423
+      Isometric_Pipes_28: 6614581859988616305
+      Isometric_Pipes_29: 9015802630596752115
+      Isometric_Pipes_3: 3032160244498738640
+      Isometric_Pipes_30: 8492825044286960385
+      Isometric_Pipes_31: -5325373834925609292
+      Isometric_Pipes_32: 4386785337069372032
+      Isometric_Pipes_33: 2339893967724393258
+      Isometric_Pipes_34: 4525505848390155398
+      Isometric_Pipes_35: -4983126586548461443
+      Isometric_Pipes_4: 5118198209391192400
+      Isometric_Pipes_5: -1717238203508975539
+      Isometric_Pipes_6: -1617480952678996911
+      Isometric_Pipes_7: -851594811384049596
+      Isometric_Pipes_8: -6447137682720642707
+      Isometric_Pipes_9: -5719415721127186001
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -38,14 +38,11 @@ public class PlayerMovements : MonoBehaviour
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
-
     private Rigidbody2D rgbd;
     private SpriteRenderer rend;
     private Animator anim;
     private AudioSource audioSource;
 
-
-    
     void Start()
     {
         canMove = true;
@@ -59,16 +56,13 @@ public class PlayerMovements : MonoBehaviour
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        
     }
 
-   
     void Update()
     {
         if (isDashing){
             return;
         }
-
 
         horizontalValue = Input.GetAxis("Horizontal");
         if (horizontalValue < 0)
@@ -93,21 +87,17 @@ public class PlayerMovements : MonoBehaviour
        }
     }
 
-
-
     private void FixedUpdate()
     {
         if (isDashing){
-        return;
+            return;
         }
-
 
         if(!canMove)
         {
             return;
         }
         rgbd.linearVelocity = new Vector2(horizontalValue * moveSpeed * Time.deltaTime, rgbd.linearVelocity.y);
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -137,55 +127,36 @@ public class PlayerMovements : MonoBehaviour
         {
             RestoreHealth(other.gameObject);
         }
-        
-        
     }
 
     private void FlipSprite(bool direction)
     {
         rend.flipX = direction;
     }
+
     private void Jump()
     {
         rgbd.AddForce(new Vector2(0, jumpForce));
         int randomvalue = Random.Range(0, jumpSounds.Length);
-        audioSource.PlayOneShot(jumpSounds[randomvalue], 0.5f);
+        audioSource.PlayOneShot(jumpSounds[randomvalue], 0.2f);
         Instantiate(dustParticles, transform.position, dustParticles.transform.localRotation);
     }
 
-
-
-
    private IEnumerator Dash()
-{
-    canDash = false;
-    isDashing = true;
-    float originalGravity = rgbd.gravityScale;
-    rgbd.gravityScale = 0f;
-    rgbd.linearVelocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-    tr.emitting = true;
-    yield return new WaitForSeconds(dashingTime);
-    tr.emitting = false;
-    rgbd.gravityScale = originalGravity;
-    isDashing = false;
-    yield return new WaitForSeconds(dashingCooldown);
-    canDash = true;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rgbd.gravityScale;
+        rgbd.gravityScale = 0f;
+        rgbd.linearVelocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        tr.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        tr.emitting = false;
+        rgbd.gravityScale = originalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
 
     public void TakeDamage( int damageAmount)
     {
@@ -210,7 +181,6 @@ public class PlayerMovements : MonoBehaviour
         canMove = true;
     }
   
-
     private void Respawn()
     {
        currentHealth = startingHealth;
@@ -218,6 +188,7 @@ public class PlayerMovements : MonoBehaviour
         transform.position = spawnPosition.position;
        rgbd.linearVelocity = Vector2.zero;
     }
+
     private void RestoreHealth(GameObject healthPickup)
     {
         if (currentHealth >= startingHealth)
@@ -236,9 +207,9 @@ public class PlayerMovements : MonoBehaviour
             }
         }
     }
+
     private void UpdateHealthBar()
     {
-        
         healthSlider.value = currentHealth;
         if(currentHealth >= 2)
         {
@@ -246,18 +217,14 @@ public class PlayerMovements : MonoBehaviour
         }
         else
         {
-
             fillColor.color = Color.red;
         }
     }
+
     private bool CheckIfGrounded()
     {
         RaycastHit2D leftHit = Physics2D.Raycast(leftFoot.position, Vector2.down,rayDistanse, whatIsGround);
         RaycastHit2D rightHit = Physics2D.Raycast(rightFoot.position, Vector2.down,rayDistanse, whatIsGround);
-        
-        
-        //Debug.DrawRay(leftFoot.position, Vector2.down * rayDistanse, Color.blue, 0.25f);
-        //Debug.DrawRay(rightFoot.position, Vector2.down * rayDistanse, Color.red, 0.25f);
         
         if (leftHit.collider != null && leftHit.collider.CompareTag("Ground") || rightHit.collider != null && rightHit.collider.CompareTag("Ground"))
         { 
@@ -267,11 +234,9 @@ public class PlayerMovements : MonoBehaviour
         { 
             return false;
         }
-      
-     
     }
+
     private void OnCollisionEnter2D(Collision2D other)
-       
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -286,5 +251,4 @@ public class PlayerMovements : MonoBehaviour
             other.transform.SetParent(null);
         }
     }
-
 }
