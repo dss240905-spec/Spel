@@ -12,6 +12,7 @@ TagManager:
   - Health
   - Diamond
   - SilverCoin
+  - AttackHitBox
   layers:
   - Default
   - TransparentFX

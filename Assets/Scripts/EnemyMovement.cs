@@ -7,12 +7,19 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float knockbackForce = 200f;
     [SerializeField] private float upwardForce = 100f;
     [SerializeField] private int damageGiven = 1;
+    [SerializeField] private int maxHealth = 7;
+    private int currentHealth;
     private SpriteRenderer rend;
     private bool canMove = true;
     private void Start()
     {
         rend = GetComponent<SpriteRenderer>();
+       
+    
+        rend = GetComponent<SpriteRenderer>();
+        currentHealth = maxHealth;
     }
+
     void FixedUpdate()
     {
       transform.Translate(new Vector2(moveSpeed,0) *Time.deltaTime);
@@ -41,14 +48,21 @@ public class EnemyMovement : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerMovements>().TakeDamage(damageGiven);
-            if(other.transform.position.x > transform.position.x)
+            PlayerAttacks playerAttack = other.gameObject.GetComponent<PlayerAttacks>();
+
+            // Only damage player if they are NOT attacking
+            if (playerAttack == null || !playerAttack.IsAttacking)
             {
-                other.gameObject.GetComponent<PlayerMovements>().TakeKnockBack(knockbackForce, upwardForce);
-            }
-            else
-            {
-                other.gameObject.GetComponent<PlayerMovements>().TakeKnockBack(-knockbackForce, upwardForce);
+                other.gameObject.GetComponent<PlayerMovements>().TakeDamage(damageGiven);
+
+                if (other.transform.position.x > transform.position.x)
+                {
+                    other.gameObject.GetComponent<PlayerMovements>().TakeKnockBack(knockbackForce, upwardForce);
+                }
+                else
+                {
+                    other.gameObject.GetComponent<PlayerMovements>().TakeKnockBack(-knockbackForce, upwardForce);
+                }
             }
         }
 
@@ -68,5 +82,30 @@ public class EnemyMovement : MonoBehaviour
             Destroy(gameObject,0.5f);
 
         }
+    }
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            // Optional: play "hit" animation or flash red
+            GetComponent<Animator>().SetTrigger("Hit");
+        }
+    }
+    private void Die()
+    {
+        // Play animation, disable movement
+        canMove = false;
+
+        // Optional: disable colliders so player can’t bump into dead enemy
+        GetComponent<Collider2D>().enabled = false;
+
+        // Destroy after a short delay
+        Destroy(gameObject, 0.5f);
     }
 }

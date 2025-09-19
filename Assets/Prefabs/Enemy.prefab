@@ -54,6 +54,7 @@ MonoBehaviour:
   knockbackForce: 400
   upwardForce: 180
   damageGiven: 1
+  maxHealth: 7
 --- !u!212 &2613795217518864560
 SpriteRenderer:
   m_ObjectHideFlags: 0
