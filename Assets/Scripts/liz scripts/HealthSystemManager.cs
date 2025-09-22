@@ -7,19 +7,23 @@ public class HealthSystemManager : MonoBehaviour
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
-    
+    public Animator[] heartAnimators;
 
 
     public void SetHealth(int health)
     {
 
-        for (int i = 0; i < hearts.Length; i++)
+        for (int i = 0; i < heartAnimators.Length; i++)
         {
             if (i < health)
-                hearts[i].sprite = fullHeart;
+            {
+                heartAnimators[i].SetBool("IsFull", true);
+            }
 
             else
-                hearts[i].sprite = emptyHeart;
+            {
+                heartAnimators[i].SetBool("IsFull", false);
+            }
         }
     }
 

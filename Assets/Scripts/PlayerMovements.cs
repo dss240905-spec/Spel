@@ -31,7 +31,8 @@ public class PlayerMovements : MonoBehaviour
     public HealthSystemManager healthUI;
     public int maxHealth = 3;
     private int currentHealth = 0;
-    public HealthSystemManager healthSystemManager;
+
+
 
     private Rigidbody2D rgbd;
     private SpriteRenderer rend;
@@ -148,7 +149,7 @@ public class PlayerMovements : MonoBehaviour
     {
         currentHealth -= damageGiven;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        healthSystemManager.SetHealth(currentHealth);
+        healthUI.SetHealth(currentHealth);
 
         
 
@@ -195,6 +196,7 @@ public class PlayerMovements : MonoBehaviour
                 currentHealth = maxHealth;
             }
         }
+        healthUI.SetHealth(currentHealth);
     }
    
     private bool CheckIfGrounded()
