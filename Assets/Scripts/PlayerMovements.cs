@@ -45,7 +45,9 @@ public class PlayerMovements : MonoBehaviour
     {
         canMove = true;
         currentHealth = maxHealth;
+
         healthUI.SetHealth(currentHealth);
+
         coinText.text = "" + coinsCollected;
         if (diamondText != null)
             diamondText.text = "" + diamondsCollected;
@@ -78,15 +80,6 @@ public class PlayerMovements : MonoBehaviour
         anim.SetFloat("MoveSpeed", Mathf.Abs(rgbd.linearVelocity.x));
         anim.SetFloat("VerticalSpeed", rgbd.linearVelocity.y);
         anim.SetBool("IsGrounded", CheckIfGrounded());
-
-
-
-
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            TakeDamage(1);
-        }
        
     }
 
@@ -149,9 +142,9 @@ public class PlayerMovements : MonoBehaviour
     {
         currentHealth -= damageGiven;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        
         healthUI.SetHealth(currentHealth);
 
-        
 
         if (currentHealth <= 0)
         {
@@ -171,7 +164,6 @@ public class PlayerMovements : MonoBehaviour
         canMove = true;
     }
   
-
     private void Respawn()
     {
        currentHealth = maxHealth;
@@ -179,24 +171,26 @@ public class PlayerMovements : MonoBehaviour
         transform.position = spawnPosition.position;
        rgbd.linearVelocity = Vector2.zero;
     }
+    
     private void RestoreHealth(GameObject healthPickup)
     {
         if (currentHealth >= maxHealth)
-        {
             return;
-        }
-        else
-        {
-            int healthToRestore = healthPickup.GetComponent<HealthPickUp>().healthAmount;
-            currentHealth += 3;
-            
-            Destroy(healthPickup);
-            if(currentHealth>=maxHealth)
-            {
-                currentHealth = maxHealth;
-            }
-        }
+
+        //Get how much health this pickup should restore
+        int healthToRestore = healthPickup.GetComponent<HealthPickUp>().healthAmount;
+
+        //Add it to current health
+        currentHealth += healthToRestore;
+
+        //Clamp so we never exceed max health
+        currentHealth += Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        //Update the hearts UI once
         healthUI.SetHealth(currentHealth);
+
+        //Remove the pickup from the scene
+        Destroy(healthPickup);
     }
    
     private bool CheckIfGrounded()
@@ -236,5 +230,6 @@ public class PlayerMovements : MonoBehaviour
         }
     }
 
+    
 
 }

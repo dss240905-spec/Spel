@@ -15,18 +15,15 @@ public class HealthSystemManager : MonoBehaviour
 
         for (int i = 0; i < heartAnimators.Length; i++)
         {
-            if (i < health)
-            {
-                heartAnimators[i].SetBool("IsFull", true);
-            }
 
-            else
+            bool shouldBeFull = i < health;
+            
+            if (heartAnimators[i].GetBool("IsFull") != shouldBeFull)
             {
-                heartAnimators[i].SetBool("IsFull", false);
+                heartAnimators[i].SetBool("IsFull", shouldBeFull);
             }
         }
     }
-
 
 
 
