@@ -10,7 +10,7 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField] private Transform leftFoot, rightFoot;
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private LayerMask whatIsGround;
-    [SerializeField] private Slider healthSlider;
+    
     [SerializeField] private Image fillColor;
     [SerializeField] private TMP_Text coinText;
     [SerializeField] private TMP_Text diamondText;
@@ -24,11 +24,14 @@ public class PlayerMovements : MonoBehaviour
     private bool isGrounded;
     private bool canMove;
     
-    private int startingHealth = 5;
-    private int currentHealth = 0;
     public int diamondsCollected = 0;
     public int silvercoinsCollected = 0;
     public int coinsCollected = 0;
+    
+    public HealthSystemManager healthUI;
+    public int maxHealth = 3;
+    private int currentHealth = 0;
+    public HealthSystemManager healthSystemManager;
 
     private Rigidbody2D rgbd;
     private SpriteRenderer rend;
@@ -40,7 +43,8 @@ public class PlayerMovements : MonoBehaviour
     void Start()
     {
         canMove = true;
-        currentHealth = startingHealth;
+        currentHealth = maxHealth;
+        healthUI.SetHealth(currentHealth);
         coinText.text = "" + coinsCollected;
         if (diamondText != null)
             diamondText.text = "" + diamondsCollected;
@@ -74,6 +78,14 @@ public class PlayerMovements : MonoBehaviour
         anim.SetFloat("VerticalSpeed", rgbd.linearVelocity.y);
         anim.SetBool("IsGrounded", CheckIfGrounded());
 
+
+
+
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            TakeDamage(1);
+        }
        
     }
 
@@ -132,10 +144,13 @@ public class PlayerMovements : MonoBehaviour
         Instantiate(dustParticles, transform.position, dustParticles.transform.localRotation);
     }
 
-    public void TakeDamage( int damageAmount)
+    public void TakeDamage(int damageGiven)
     {
-        currentHealth -= damageAmount ;
-        UpdateHealthBar();
+        currentHealth -= damageGiven;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        healthSystemManager.SetHealth(currentHealth);
+
+        
 
         if (currentHealth <= 0)
         {
@@ -158,14 +173,14 @@ public class PlayerMovements : MonoBehaviour
 
     private void Respawn()
     {
-       currentHealth = startingHealth;
-        UpdateHealthBar();
+       currentHealth = maxHealth;
+        
         transform.position = spawnPosition.position;
        rgbd.linearVelocity = Vector2.zero;
     }
     private void RestoreHealth(GameObject healthPickup)
     {
-        if (currentHealth >= startingHealth)
+        if (currentHealth >= maxHealth)
         {
             return;
         }
@@ -173,28 +188,15 @@ public class PlayerMovements : MonoBehaviour
         {
             int healthToRestore = healthPickup.GetComponent<HealthPickUp>().healthAmount;
             currentHealth += 3;
-            UpdateHealthBar() ;
+            
             Destroy(healthPickup);
-            if(currentHealth>=startingHealth)
+            if(currentHealth>=maxHealth)
             {
-                currentHealth = startingHealth;
+                currentHealth = maxHealth;
             }
         }
     }
-    private void UpdateHealthBar()
-    {
-        
-        healthSlider.value = currentHealth;
-        if(currentHealth >= 2)
-        {
-            fillColor.color = Color.green;
-        }
-        else
-        {
-
-            fillColor.color = Color.red;
-        }
-    }
+   
     private bool CheckIfGrounded()
     {
         RaycastHit2D leftHit = Physics2D.Raycast(leftFoot.position, Vector2.down,rayDistanse, whatIsGround);
