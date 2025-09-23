@@ -11,6 +11,15 @@ public class HealthSystemManager : MonoBehaviour
     public void SetHealth(int health)
     {
 
+        float refTime = 0f;
+        if (heartAnimators.Length > 0)
+        {
+            AnimatorStateInfo refState = heartAnimators[0].GetCurrentAnimatorStateInfo(0);
+            refTime = refState.normalizedTime % 1f;
+        }
+        
+
+
         for (int i = 0; i < heartAnimators.Length; i++)
         {
 
@@ -24,14 +33,12 @@ public class HealthSystemManager : MonoBehaviour
                 if (shouldBeFull)
                 {
 
-                    AnimatorStateInfo refState = heartAnimators[0].GetCurrentAnimatorStateInfo(0);
-
-                    if (refState.IsName("HeartIdle"))
-                    {
-                        heartAnimators[i].Play("HeartIdle", -1, refState.normalizedTime);
-                    }
+                    heartAnimators[i].Play("HeartIdle", -1, refTime);
                 }
-
+                else
+                {
+                    heartAnimators[i].Play("HeartBreak", -1, 0f);
+                }
             }
         }
     }
