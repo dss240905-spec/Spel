@@ -176,10 +176,12 @@ public class PlayerMovements : MonoBehaviour
   
     private void Respawn()
     {
-       currentHealth = maxHealth;
-        
         transform.position = spawnPosition.position;
-       rgbd.linearVelocity = Vector2.zero;
+        
+        currentHealth = maxHealth;
+        transform.position = spawnPosition.position;
+        rgbd.linearVelocity = Vector2.zero;
+        healthUI.SetHealth(currentHealth);
     }
     
     private void RestoreHealth(GameObject healthPickup)
