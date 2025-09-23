@@ -7,11 +7,19 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float knockbackForce = 200f;
     [SerializeField] private float upwardForce = 100f;
     [SerializeField] private int damageGiven = 1;
+    
+    
     private SpriteRenderer rend;
+    private AudioSource audioSource;
+    
     private bool canMove = true;
+
+
+
     private void Start()
     {
         rend = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
     void FixedUpdate()
     {
@@ -59,12 +67,20 @@ public class EnemyMovement : MonoBehaviour
         {
             other.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(other.GetComponent<Rigidbody2D>().linearVelocity.x, 0);
             other.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, bounciness));
+
             GetComponent<Animator>().SetTrigger("Hit");
-            GetComponent<BoxCollider2D>().enabled = false;
+
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
+
+            
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<Rigidbody2D>().gravityScale = 0;
             GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             canMove = false;
+
             Destroy(gameObject,0.5f);
 
         }

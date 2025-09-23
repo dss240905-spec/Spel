@@ -421,6 +421,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 495904006}
     m_Modifications:
+    - target: {fileID: 121058449485368600, guid: a4b458a1b4e5dde47b90246f7198940e, type: 3}
+      propertyPath: m_Pitch
+      value: 0.61
+      objectReference: {fileID: 0}
     - target: {fileID: 908773660074461004, guid: a4b458a1b4e5dde47b90246f7198940e, type: 3}
       propertyPath: upwardForce
       value: 100
@@ -12409,6 +12413,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 495904006}
     m_Modifications:
+    - target: {fileID: 121058449485368600, guid: a4b458a1b4e5dde47b90246f7198940e, type: 3}
+      propertyPath: m_Pitch
+      value: 0.77
+      objectReference: {fileID: 0}
     - target: {fileID: 908773660074461004, guid: a4b458a1b4e5dde47b90246f7198940e, type: 3}
       propertyPath: moveSpeed
       value: 2
