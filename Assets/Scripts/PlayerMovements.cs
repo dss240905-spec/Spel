@@ -7,10 +7,12 @@ public class PlayerMovements : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float jumpForce = 300f;
+    [SerializeField] private float footstepInterval = 0.4f;
+
+    [SerializeField] private AudioClip[] footstepSounds;
     [SerializeField] private Transform leftFoot, rightFoot;
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private LayerMask whatIsGround;
-    
     [SerializeField] private Image fillColor;
     [SerializeField] private TMP_Text coinText;
     [SerializeField] private TMP_Text diamondText;
@@ -21,19 +23,19 @@ public class PlayerMovements : MonoBehaviour
 
     private float horizontalValue;
     private float rayDistanse = 0.25f;
+    private float footstepTimer;
+    
     private bool isGrounded;
     private bool canMove;
     
     public int diamondsCollected = 0;
     public int silvercoinsCollected = 0;
     public int coinsCollected = 0;
-    
-    public HealthSystemManager healthUI;
     public int maxHealth = 3;
     private int currentHealth = 0;
 
 
-
+    public HealthSystemManager healthUI;
     private Rigidbody2D rgbd;
     private SpriteRenderer rend;
     private Animator anim;
@@ -56,8 +58,7 @@ public class PlayerMovements : MonoBehaviour
         rgbd = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
-        
+        audioSource = GetComponent<AudioSource>();        
     }
 
    
@@ -80,7 +81,20 @@ public class PlayerMovements : MonoBehaviour
         anim.SetFloat("MoveSpeed", Mathf.Abs(rgbd.linearVelocity.x));
         anim.SetFloat("VerticalSpeed", rgbd.linearVelocity.y);
         anim.SetBool("IsGrounded", CheckIfGrounded());
-       
+
+        if (CheckIfGrounded() && Mathf.Abs(horizontalValue) > 0.1f)
+        {
+            footstepTimer -= Time.deltaTime;
+            if (footstepTimer <= 0f)
+            {
+                PlayeFootstep();
+                footstepTimer = footstepInterval;
+            }
+        }
+       else
+        {
+            footstepTimer = 0f; //reset when not moving.
+        }
     }
 
 
@@ -92,7 +106,6 @@ public class PlayerMovements : MonoBehaviour
             return;
         }
         rgbd.linearVelocity = new Vector2(horizontalValue * moveSpeed * Time.deltaTime, rgbd.linearVelocity.y);
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -121,9 +134,7 @@ public class PlayerMovements : MonoBehaviour
         if (other.CompareTag("Health"))
         {
             RestoreHealth(other.gameObject);
-        }
-        
-        
+        }        
     }
 
     private void FlipSprite(bool direction)
@@ -144,7 +155,6 @@ public class PlayerMovements : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         
         healthUI.SetHealth(currentHealth);
-
 
         if (currentHealth <= 0)
         {
@@ -230,6 +240,14 @@ public class PlayerMovements : MonoBehaviour
         }
     }
 
-    
+    private void PlayeFootstep()
+    {
+        if (footstepSounds.Length > 0)
+        {
+            int randomIndex = Random.Range(0, footstepSounds.Length);
+            audioSource.pitch = Random.Range(0.9f, 1.1f); //small pitch variation for realism
+            audioSource.PlayOneShot(footstepSounds[randomIndex], 0.7f);
+        }
+    }
 
 }

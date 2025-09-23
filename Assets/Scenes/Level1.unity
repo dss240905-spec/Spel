@@ -4203,6 +4203,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 300
   jumpForce: 400
+  footstepInterval: 0.4
+  footstepSounds:
+  - {fileID: 8300000, guid: f9aff93e0a8d93e4fa4b33cda3abd7f3, type: 3}
+  - {fileID: 8300000, guid: 85e943c20cdafc44b9c4e229fffb856c, type: 3}
   leftFoot: {fileID: 712012295}
   rightFoot: {fileID: 1832672688}
   spawnPosition: {fileID: 851642861}
@@ -4223,8 +4227,8 @@ MonoBehaviour:
   diamondsCollected: 0
   silvercoinsCollected: 0
   coinsCollected: 0
-  healthUI: {fileID: 176942543}
   maxHealth: 3
+  healthUI: {fileID: 176942543}
 --- !u!95 &396558937
 Animator:
   serializedVersion: 7
