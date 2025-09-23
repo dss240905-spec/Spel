@@ -46,7 +46,7 @@ public class PlayerMovements : MonoBehaviour
         canMove = true;
         currentHealth = maxHealth;
 
-        healthUI.SetHealth(currentHealth);
+            healthUI.SetHealth(currentHealth);
 
         coinText.text = "" + coinsCollected;
         if (diamondText != null)
