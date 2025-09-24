@@ -4720,6 +4720,7 @@ MonoBehaviour:
   coinEffect: {fileID: 969922034080487794, guid: ec133e2eb8b3daa47927debe6204192b, type: 3}
   dustParticles: {fileID: 2166328220164494733, guid: 4c7b33b917b48fe44abf77114a890a71, type: 3}
   healthPickupSound: {fileID: 8300000, guid: cade13f9066c3ad4c9a334b1c9618b52, type: 3}
+  playerHurt: {fileID: 8300000, guid: bdd5697f4b2dd76478048e9214430f7f, type: 3}
   diamondsCollected: 0
   silvercoinsCollected: 0
   coinsCollected: 0

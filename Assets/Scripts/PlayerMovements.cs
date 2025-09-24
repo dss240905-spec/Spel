@@ -21,6 +21,7 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField] private AudioClip[] jumpSounds;
     [SerializeField] private GameObject coinEffect,dustParticles;
     [SerializeField] private AudioClip healthPickupSound;
+    [SerializeField] private AudioClip playerHurt;
 
     private float horizontalValue;
     private float rayDistanse = 0.25f;
@@ -156,6 +157,12 @@ public class PlayerMovements : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         
         healthUI.SetHealth(currentHealth);
+
+        if (playerHurt != null)
+        {
+            audioSource.pitch = 1f;
+            audioSource.PlayOneShot(playerHurt, 1f);
+        }
 
         if (currentHealth <= 0)
         {
