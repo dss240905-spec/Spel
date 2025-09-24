@@ -4719,6 +4719,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9ec9438a82908ad40879bc80a29c08f4, type: 3}
   coinEffect: {fileID: 969922034080487794, guid: ec133e2eb8b3daa47927debe6204192b, type: 3}
   dustParticles: {fileID: 2166328220164494733, guid: 4c7b33b917b48fe44abf77114a890a71, type: 3}
+  healthPickupSound: {fileID: 8300000, guid: cade13f9066c3ad4c9a334b1c9618b52, type: 3}
   diamondsCollected: 0
   silvercoinsCollected: 0
   coinsCollected: 0
@@ -15199,7 +15200,7 @@ Transform:
   m_GameObject: {fileID: 1885462020}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 41.98, y: 6.08, z: 0}
+  m_LocalPosition: {x: 39.76, y: 6.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

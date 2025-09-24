@@ -20,6 +20,7 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField] private AudioClip pickupSound;
     [SerializeField] private AudioClip[] jumpSounds;
     [SerializeField] private GameObject coinEffect,dustParticles;
+    [SerializeField] private AudioClip healthPickupSound;
 
     private float horizontalValue;
     private float rayDistanse = 0.25f;
@@ -203,6 +204,12 @@ public class PlayerMovements : MonoBehaviour
 
         //Remove the pickup from the scene
         Destroy(healthPickup);
+
+        if (healthPickupSound != null)
+        {
+            audioSource.pitch = 1f;
+            audioSource.PlayOneShot(healthPickupSound, 0.7f);
+        }
     }
    
     private bool CheckIfGrounded()
