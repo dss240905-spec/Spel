@@ -8,10 +8,12 @@ public class PlayerMovements : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float jumpForce = 300f;
+    [SerializeField] private float footstepInterval = 0.4f;
+
+    [SerializeField] private AudioClip[] footstepSounds;
     [SerializeField] private Transform leftFoot, rightFoot;
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private LayerMask whatIsGround;
-    [SerializeField] private Slider healthSlider;
     [SerializeField] private Image fillColor;
     [SerializeField] private TMP_Text coinText;
     [SerializeField] private TMP_Text diamondText;
@@ -20,17 +22,21 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField] private AudioClip[] jumpSounds;
     [SerializeField] private GameObject coinEffect,dustParticles;
     [SerializeField] private TrailRenderer tr;
+    [SerializeField] private AudioClip healthPickupSound;
+    [SerializeField] private AudioClip playerHurt;
 
     private float horizontalValue;
     private float rayDistanse = 0.25f;
+    private float footstepTimer;
+    
     private bool isGrounded;
     private bool canMove;
     
-    private int startingHealth = 5;
-    private int currentHealth = 0;
     public int diamondsCollected = 0;
     public int silvercoinsCollected = 0;
     public int coinsCollected = 0;
+    public int maxHealth = 3;
+    private int currentHealth = 0;
 
     private bool canDash = true;
     private bool isDashing; 
@@ -38,6 +44,8 @@ public class PlayerMovements : MonoBehaviour
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
+
+    public HealthSystemManager healthUI;
     private Rigidbody2D rgbd;
     private SpriteRenderer rend;
     private Animator anim;
@@ -79,6 +87,20 @@ public class PlayerMovements : MonoBehaviour
             if (healthSlider != null)
                 UpdateHealthBar();
         }
+        canMove = true;
+        currentHealth = maxHealth;
+
+            healthUI.SetHealth(currentHealth);
+
+        coinText.text = "" + coinsCollected;
+        if (diamondText != null)
+            diamondText.text = "" + diamondsCollected;
+        if (silvercoinText != null)
+            silvercoinText.text = "" + silvercoinsCollected;
+        rgbd = GetComponent<Rigidbody2D>();
+        rend = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();        
     }
 
     void Update()
@@ -115,6 +137,19 @@ public class PlayerMovements : MonoBehaviour
        if(Input.GetKeyDown(KeyCode.LeftShift) && canDash){
         StartCoroutine(Dash());
        }
+        if (CheckIfGrounded() && Mathf.Abs(horizontalValue) > 0.1f)
+        {
+            footstepTimer -= Time.deltaTime;
+            if (footstepTimer <= 0f)
+            {
+                PlayeFootstep();
+                footstepTimer = footstepInterval;
+            }
+        }
+       else
+        {
+            footstepTimer = 0f; //reset when not moving.
+        }
     }
 
     private void FixedUpdate()
@@ -131,6 +166,7 @@ public class PlayerMovements : MonoBehaviour
         }
         // Fixed movement - removed Time.deltaTime
         rgbd.linearVelocity = new Vector2(horizontalValue * moveSpeed, rgbd.linearVelocity.y);
+        rgbd.linearVelocity = new Vector2(horizontalValue * moveSpeed * Time.deltaTime, rgbd.linearVelocity.y);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -166,6 +202,7 @@ public class PlayerMovements : MonoBehaviour
         {
             RestoreHealth(other.gameObject);
         }
+        }        
     }
 
     private void FlipSprite(bool direction)
@@ -233,9 +270,18 @@ private IEnumerator Dash()
 
 
     public void TakeDamage( int damageAmount)
+    public void TakeDamage(int damageGiven)
     {
-        currentHealth -= damageAmount ;
-        UpdateHealthBar();
+        currentHealth -= damageGiven;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        
+        healthUI.SetHealth(currentHealth);
+
+        if (playerHurt != null)
+        {
+            audioSource.pitch = 1f;
+            audioSource.PlayOneShot(playerHurt, 1f);
+        }
 
         if (currentHealth <= 0)
         {
@@ -267,10 +313,17 @@ private IEnumerator Dash()
             rgbd.linearVelocity = Vector2.zero;
     }
 
+        transform.position = spawnPosition.position;
+        
+        currentHealth = maxHealth;
+        transform.position = spawnPosition.position;
+        rgbd.linearVelocity = Vector2.zero;
+        healthUI.SetHealth(currentHealth);
+    }
+    
     private void RestoreHealth(GameObject healthPickup)
     {
-        if (currentHealth >= startingHealth)
-        {
+        if (currentHealth >= maxHealth)
             return;
         }
         else
@@ -303,6 +356,29 @@ private IEnumerator Dash()
         }
     }
 
+
+        //Get how much health this pickup should restore
+        int healthToRestore = healthPickup.GetComponent<HealthPickUp>().healthAmount;
+
+        //Add it to current health
+        currentHealth += healthToRestore;
+
+        //Clamp so we never exceed max health
+        currentHealth += Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        //Update the hearts UI once
+        healthUI.SetHealth(currentHealth);
+
+        //Remove the pickup from the scene
+        Destroy(healthPickup);
+
+        if (healthPickupSound != null)
+        {
+            audioSource.pitch = 1f;
+            audioSource.PlayOneShot(healthPickupSound, 0.7f);
+        }
+    }
+   
     private bool CheckIfGrounded()
     {
         if (leftFoot == null || rightFoot == null)
@@ -336,4 +412,16 @@ private IEnumerator Dash()
             other.transform.SetParent(null);
         }
     }
+}
+
+    private void PlayeFootstep()
+    {
+        if (footstepSounds.Length > 0)
+        {
+            int randomIndex = Random.Range(0, footstepSounds.Length);
+            audioSource.pitch = Random.Range(0.9f, 1.1f); //small pitch variation for realism
+            audioSource.PlayOneShot(footstepSounds[randomIndex], 0.7f);
+        }
+    }
+
 }
