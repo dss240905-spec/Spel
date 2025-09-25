@@ -29,7 +29,18 @@ public class EnemyMovement : MonoBehaviour
 
         if (rend == null)
             rend = GetComponent<SpriteRenderer>();
+    [SerializeField] private float bounciness = 100;
+    [SerializeField] private float knockbackForce = 200f;
+    [SerializeField] private float upwardForce = 100f;
+    [SerializeField] private int damageGiven = 1;
+    
+    
+    rend = GetComponent<SpriteRenderer>();
+    audioSource = GetComponent<AudioSource>();
+    
+    private bool canMove = true;
     }
+
 
     void FixedUpdate()
     {
@@ -66,7 +77,25 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (other.CompareTag("Player")) 
+        {
+            other.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(other.GetComponent<Rigidbody2D>().linearVelocity.x, 0);
+            other.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, bounciness));
+
+            GetComponent<Animator>().SetTrigger("Hit");
+
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
+
+            
+            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<Rigidbody2D>().gravityScale = 0;
+            GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+            canMove = false;
+
+            Destroy(gameObject,0.5f);
 
         // Bounce the player when jumping on the enemy
         Rigidbody2D playerRb = other.GetComponent<Rigidbody2D>();
@@ -129,4 +158,5 @@ public class EnemyMovement : MonoBehaviour
         yield return new WaitForSeconds(flashDuration);
         rend.color = originalColor; // back to normal
     }
+}
 }

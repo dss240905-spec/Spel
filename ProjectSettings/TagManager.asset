@@ -13,6 +13,7 @@ TagManager:
   - Diamond
   - SilverCoin
   - Foreground
+  - Tree
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - EnemyBlock
   - Player
   - Platform
-  - 
+  - Foreground
   - 
   - 
   - 
@@ -70,6 +71,10 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 705698721
+    uniqueID: 1137649397
+    locked: 0
+  - name: Trees
+    uniqueID: 3238278193
     locked: 0
   m_RenderingLayers:
   - Default
