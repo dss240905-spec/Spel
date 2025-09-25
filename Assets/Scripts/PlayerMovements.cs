@@ -68,14 +68,12 @@ public class PlayerMovements : MonoBehaviour
 
         // Check if UI elements are assigned
         if (coinText == null) Debug.LogError("Coin Text not assigned!", this);
-        if (healthSlider == null) Debug.LogError("Health Slider not assigned!", this);
         if (fillColor == null) Debug.LogError("Fill Color not assigned!", this);
 
         // Only proceed if essential components exist
         if (rgbd != null)
         {
             canMove = true;
-            currentHealth = startingHealth;
             
             // Safe UI updates
             if (coinText != null)
@@ -84,13 +82,12 @@ public class PlayerMovements : MonoBehaviour
                 diamondText.text = "" + diamondsCollected;
             if (silvercoinText != null)
                 silvercoinText.text = "" + silvercoinsCollected;
-            if (healthSlider != null)
-                UpdateHealthBar();
+            
         }
         canMove = true;
         currentHealth = maxHealth;
 
-            healthUI.SetHealth(currentHealth);
+          //  healthUI.SetHealth(currentHealth);
 
         coinText.text = "" + coinsCollected;
         if (diamondText != null)
@@ -268,8 +265,9 @@ private IEnumerator Dash()
 
     public void TakeDamage( int damageAmount)
     {
-        currentHealth -= damageGiven;
+        currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+       
         
         healthUI.SetHealth(currentHealth);
 
@@ -301,8 +299,8 @@ private IEnumerator Dash()
   
     private void Respawn()
     {
-       currentHealth = startingHealth;
-        UpdateHealthBar();
+       currentHealth = maxHealth;
+       healthUI.SetHealth(maxHealth);
         if (spawnPosition != null)
             transform.position = spawnPosition.position;
         if (rgbd != null)

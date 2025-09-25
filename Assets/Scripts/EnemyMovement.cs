@@ -18,31 +18,31 @@ public class EnemyMovement : MonoBehaviour
 
     [Header("Bounce/Knockback")]
     [SerializeField] private float bounciness = 100f;
+    [SerializeField] private float knockbackForce = 200f;
+    [SerializeField] private float upwardForce = 100f;
+    [SerializeField] private int damageGiven = 1;
 
     [Header("Flash Settings")]
     [SerializeField] private Color flashColor = Color.white;
     [SerializeField] private float flashDuration = 0.2f;
 
+    [SerializeField] private AudioSource audioSource;
+
     private void Start()
     {
         currentHealth = maxHealth;
 
-        if (rend == null)
-            rend = GetComponent<SpriteRenderer>();
-    [SerializeField] private float bounciness = 100;
-    [SerializeField] private float knockbackForce = 200f;
-    [SerializeField] private float upwardForce = 100f;
-    [SerializeField] private int damageGiven = 1;
-    
-    
     rend = GetComponent<SpriteRenderer>();
     audioSource = GetComponent<AudioSource>();
     
-    private bool canMove = true;
+    canMove = true;
+        if (rend == null)
+            rend = GetComponent<SpriteRenderer>();
+    
     }
 
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (!canMove) return;
 
@@ -96,6 +96,7 @@ public class EnemyMovement : MonoBehaviour
             canMove = false;
 
             Destroy(gameObject,0.5f);
+        }
 
         // Bounce the player when jumping on the enemy
         Rigidbody2D playerRb = other.GetComponent<Rigidbody2D>();
@@ -109,7 +110,7 @@ public class EnemyMovement : MonoBehaviour
         TakeDamage(1);
     }
 
-    public void TakeDamage(int damage)
+    private void TakeDamage(int damage)
     {
         currentHealth -= damage;
 
@@ -158,5 +159,4 @@ public class EnemyMovement : MonoBehaviour
         yield return new WaitForSeconds(flashDuration);
         rend.color = originalColor; // back to normal
     }
-}
 }
