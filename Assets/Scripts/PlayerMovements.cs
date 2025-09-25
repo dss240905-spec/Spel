@@ -45,21 +45,46 @@ public class PlayerMovements : MonoBehaviour
 
     void Start()
     {
-        canMove = true;
-        currentHealth = startingHealth;
-        coinText.text = "" + coinsCollected;
-        if (diamondText != null)
-            diamondText.text = "" + diamondsCollected;
-        if (silvercoinText != null)
-            silvercoinText.text = "" + silvercoinsCollected;
+        // Get components with null checks
         rgbd = GetComponent<Rigidbody2D>();
+        if (rgbd == null) Debug.LogError("Rigidbody2D missing from player!", this);
+        
         rend = GetComponent<SpriteRenderer>();
+        if (rend == null) Debug.LogError("SpriteRenderer missing from player!", this);
+        
         anim = GetComponent<Animator>();
+        if (anim == null) Debug.LogError("Animator missing from player!", this);
+        
         audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) Debug.LogError("AudioSource missing from player!", this);
+
+        // Check if UI elements are assigned
+        if (coinText == null) Debug.LogError("Coin Text not assigned!", this);
+        if (healthSlider == null) Debug.LogError("Health Slider not assigned!", this);
+        if (fillColor == null) Debug.LogError("Fill Color not assigned!", this);
+
+        // Only proceed if essential components exist
+        if (rgbd != null)
+        {
+            canMove = true;
+            currentHealth = startingHealth;
+            
+            // Safe UI updates
+            if (coinText != null)
+                coinText.text = "" + coinsCollected;
+            if (diamondText != null)
+                diamondText.text = "" + diamondsCollected;
+            if (silvercoinText != null)
+                silvercoinText.text = "" + silvercoinsCollected;
+            if (healthSlider != null)
+                UpdateHealthBar();
+        }
     }
 
     void Update()
     {
+        if (rgbd == null) return; // Don't run if rigidbody is missing
+
         if (isDashing){
             return;
         }
@@ -78,9 +103,14 @@ public class PlayerMovements : MonoBehaviour
         {
             Jump();
         }
-        anim.SetFloat("MoveSpeed", Mathf.Abs(rgbd.linearVelocity.x));
-        anim.SetFloat("VerticalSpeed", rgbd.linearVelocity.y);
-        anim.SetBool("IsGrounded", CheckIfGrounded());
+        
+        // Safe animator updates
+        if (anim != null)
+        {
+            anim.SetFloat("MoveSpeed", Mathf.Abs(rgbd.linearVelocity.x));
+            anim.SetFloat("VerticalSpeed", rgbd.linearVelocity.y);
+            anim.SetBool("IsGrounded", CheckIfGrounded());
+        }
 
        if(Input.GetKeyDown(KeyCode.LeftShift) && canDash){
         StartCoroutine(Dash());
@@ -89,6 +119,8 @@ public class PlayerMovements : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (rgbd == null) return; // Safety check
+
         if (isDashing){
             return;
         }
@@ -97,31 +129,38 @@ public class PlayerMovements : MonoBehaviour
         {
             return;
         }
-        rgbd.linearVelocity = new Vector2(horizontalValue * moveSpeed * Time.deltaTime, rgbd.linearVelocity.y);
+        // Fixed movement - removed Time.deltaTime
+        rgbd.linearVelocity = new Vector2(horizontalValue * moveSpeed, rgbd.linearVelocity.y);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (audioSource == null) return;
+
         if (other.CompareTag("Coin"))
         {
             Destroy(other.gameObject);
             coinsCollected++;
-            coinText.text = "" + coinsCollected;
+            if (coinText != null)
+                coinText.text = "" + coinsCollected;
             audioSource.pitch = Random.Range(0.8f, 1.2f);
             audioSource.PlayOneShot(pickupSound, 0.5f);
-            Instantiate(coinEffect, other.transform.position, Quaternion.identity);
+            if (coinEffect != null)
+                Instantiate(coinEffect, other.transform.position, Quaternion.identity);
         }
         if (other.CompareTag("Diamond"))
         {
             Destroy(other.gameObject);
             diamondsCollected++;
-            diamondText.text = "" + diamondsCollected;
+            if (diamondText != null)
+                diamondText.text = "" + diamondsCollected;
         }
         if (other.CompareTag("SilverCoin"))
         {
             Destroy(other.gameObject);
             silvercoinsCollected++;
-            silvercoinText.text = "" + silvercoinsCollected;
+            if (silvercoinText != null)
+                silvercoinText.text = "" + silvercoinsCollected;
         }
         if (other.CompareTag("Health"))
         {
@@ -131,32 +170,67 @@ public class PlayerMovements : MonoBehaviour
 
     private void FlipSprite(bool direction)
     {
-        rend.flipX = direction;
+        if (rend != null)
+            rend.flipX = direction;
     }
 
     private void Jump()
     {
+        if (rgbd == null) return;
+        
         rgbd.AddForce(new Vector2(0, jumpForce));
-        int randomvalue = Random.Range(0, jumpSounds.Length);
-        audioSource.PlayOneShot(jumpSounds[randomvalue], 0.2f);
-        Instantiate(dustParticles, transform.position, dustParticles.transform.localRotation);
+        
+        if (audioSource != null && jumpSounds != null && jumpSounds.Length > 0)
+        {
+            int randomvalue = Random.Range(0, jumpSounds.Length);
+            audioSource.PlayOneShot(jumpSounds[randomvalue], 0.2f);
+        }
+        
+        if (dustParticles != null)
+            Instantiate(dustParticles, transform.position, dustParticles.transform.localRotation);
     }
 
-   private IEnumerator Dash()
-    {
-        canDash = false;
-        isDashing = true;
-        float originalGravity = rgbd.gravityScale;
-        rgbd.gravityScale = 0f;
-        rgbd.linearVelocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        tr.emitting = true;
-        yield return new WaitForSeconds(dashingTime);
-        tr.emitting = false;
-        rgbd.gravityScale = originalGravity;
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
-    }
+private IEnumerator Dash()
+{
+    if (rgbd == null || tr == null) yield break;
+
+    // Determine dash direction based on input
+    Vector2 dashDirection = Vector2.zero;
+
+    // Left
+    if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        dashDirection = Vector2.left;
+    // Right
+    else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        dashDirection = Vector2.right;
+    // Down (only if in air)
+    else if (!isGrounded && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+        dashDirection = Vector2.down;
+
+    // If no direction is pressed, don't dash
+    if (dashDirection == Vector2.zero)
+        yield break;
+
+    canDash = false;
+    isDashing = true;
+
+    float originalGravity = rgbd.gravityScale;
+    rgbd.gravityScale = 0f;
+
+    rgbd.linearVelocity = dashDirection.normalized * dashingPower;
+
+    tr.emitting = true;
+    yield return new WaitForSeconds(dashingTime);
+    tr.emitting = false;
+
+    rgbd.gravityScale = originalGravity;
+    isDashing = false;
+
+    yield return new WaitForSeconds(dashingCooldown);
+    canDash = true;
+}
+
+
 
     public void TakeDamage( int damageAmount)
     {
@@ -171,6 +245,8 @@ public class PlayerMovements : MonoBehaviour
 
     public void TakeKnockBack(float knockbackForce, float upwards)
     {
+        if (rgbd == null) return;
+        
         canMove = false;
         rgbd.AddForce(new Vector2(knockbackForce, upwards));
         Invoke("CanMoveAgain", 0.25f);
@@ -185,8 +261,10 @@ public class PlayerMovements : MonoBehaviour
     {
        currentHealth = startingHealth;
         UpdateHealthBar();
-        transform.position = spawnPosition.position;
-       rgbd.linearVelocity = Vector2.zero;
+        if (spawnPosition != null)
+            transform.position = spawnPosition.position;
+        if (rgbd != null)
+            rgbd.linearVelocity = Vector2.zero;
     }
 
     private void RestoreHealth(GameObject healthPickup)
@@ -197,9 +275,8 @@ public class PlayerMovements : MonoBehaviour
         }
         else
         {
-            int healthToRestore = healthPickup.GetComponent<HealthPickUp>().healthAmount;
             currentHealth += 3;
-            UpdateHealthBar() ;
+            UpdateHealthBar();
             Destroy(healthPickup);
             if(currentHealth>=startingHealth)
             {
@@ -210,30 +287,38 @@ public class PlayerMovements : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        healthSlider.value = currentHealth;
-        if(currentHealth >= 2)
+        if (healthSlider != null)
+            healthSlider.value = currentHealth;
+        
+        if (fillColor != null)
         {
-            fillColor.color = Color.green;
-        }
-        else
-        {
-            fillColor.color = Color.red;
+            if(currentHealth >= 2)
+            {
+                fillColor.color = Color.green;
+            }
+            else
+            {
+                fillColor.color = Color.red;
+            }
         }
     }
 
     private bool CheckIfGrounded()
     {
-        RaycastHit2D leftHit = Physics2D.Raycast(leftFoot.position, Vector2.down,rayDistanse, whatIsGround);
-        RaycastHit2D rightHit = Physics2D.Raycast(rightFoot.position, Vector2.down,rayDistanse, whatIsGround);
-        
-        if (leftHit.collider != null && leftHit.collider.CompareTag("Ground") || rightHit.collider != null && rightHit.collider.CompareTag("Ground"))
-        { 
-            return true;
-        }
-        else 
-        { 
+        if (leftFoot == null || rightFoot == null)
+        {
+            Debug.LogWarning("Foot transforms not assigned for ground check!");
             return false;
         }
+
+        RaycastHit2D leftHit = Physics2D.Raycast(leftFoot.position, Vector2.down, rayDistanse, whatIsGround);
+        RaycastHit2D rightHit = Physics2D.Raycast(rightFoot.position, Vector2.down, rayDistanse, whatIsGround);
+        
+        // Debug visualization
+        Debug.DrawRay(leftFoot.position, Vector2.down * rayDistanse, Color.red);
+        Debug.DrawRay(rightFoot.position, Vector2.down * rayDistanse, Color.red);
+        
+        return (leftHit.collider != null || rightHit.collider != null);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -246,7 +331,7 @@ public class PlayerMovements : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player")&& other.transform.position.y > transform.position.y)
+        if (other.gameObject.CompareTag("Player") && other.transform.position.y > transform.position.y)
         {
             other.transform.SetParent(null);
         }

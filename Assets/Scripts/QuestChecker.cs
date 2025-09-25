@@ -3,11 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class QuestChecker : MonoBehaviour
 {
+    [Header("Quest Settings")]
+    [Tooltip("Number of coins or diamonds required to finish the quest")]
     [SerializeField] private int questGoal = 20;
+
+    [Tooltip("Set this to true if the quest should require diamonds instead of coins")]
+    [SerializeField] private bool requiresDiamonds = false;
+
+    [Header("Level Settings")]
     [SerializeField] private int levelToLoad;
+
+    [Header("Door Settings")]
     [SerializeField] private Animator doorAnimator;
-    
-    // Remove the openAnimationName since we'll use a trigger instead
+
     private bool levelIsLoading = false;
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -15,11 +23,20 @@ public class QuestChecker : MonoBehaviour
         if (other.CompareTag("Player") && !levelIsLoading)
         {
             PlayerMovements player = other.GetComponent<PlayerMovements>();
-            if (player != null && player.coinsCollected >= questGoal)
+            if (player != null)
             {
-                OpenDoor();
-                levelIsLoading = true;
-                Invoke("LoadNextLevel", 2.0f);
+                int playerProgress = requiresDiamonds ? player.diamondsCollected : player.coinsCollected;
+
+                if (playerProgress >= questGoal)
+                {
+                    OpenDoor();
+                    levelIsLoading = true;
+                    Invoke(nameof(LoadNextLevel), 2.0f);
+                }
+                else
+                {
+                    Debug.Log("You haven't collected enough yet!");
+                }
             }
         }
     }
@@ -28,7 +45,6 @@ public class QuestChecker : MonoBehaviour
     {
         if (doorAnimator != null)
         {
-            // Use SetTrigger instead of Play to trigger the animation transition
             doorAnimator.SetTrigger("OpenDoor");
         }
     }

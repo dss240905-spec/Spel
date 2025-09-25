@@ -47,11 +47,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: BGImage
-    uniqueID: 200365503
-    locked: 0
   - name: Background
     uniqueID: 2975845801
+    locked: 0
+  - name: BGImage
+    uniqueID: 200365503
     locked: 0
   - name: Water Reflect Backgroound
     uniqueID: 241693821
