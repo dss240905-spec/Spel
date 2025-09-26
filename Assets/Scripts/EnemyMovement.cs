@@ -110,7 +110,7 @@ public class EnemyMovement : MonoBehaviour
         TakeDamage(1);
     }
 
-    private void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
 
