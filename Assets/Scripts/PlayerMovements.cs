@@ -2,7 +2,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections;
 
 public class PlayerMovements : MonoBehaviour
 {
@@ -19,7 +18,6 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField] private AudioClip pickupSound;
     [SerializeField] private AudioClip[] jumpSounds;
     [SerializeField] private GameObject coinEffect,dustParticles;
-    [SerializeField] private TrailRenderer tr;
 
     private float horizontalValue;
     private float rayDistanse = 0.25f;
@@ -31,13 +29,6 @@ public class PlayerMovements : MonoBehaviour
     public int diamondsCollected = 0;
     public int silvercoinsCollected = 0;
     public int coinsCollected = 0;
-
-    private bool canDash = true;
-    private bool isDashing; 
-    private float dashingPower = 24f;
-    private float dashingTime = 0.2f;
-    private float dashingCooldown = 1f;
-
 
     private Rigidbody2D rgbd;
     private SpriteRenderer rend;
@@ -65,11 +56,6 @@ public class PlayerMovements : MonoBehaviour
    
     void Update()
     {
-        if (isDashing){
-            return;
-        }
-
-
         horizontalValue = Input.GetAxis("Horizontal");
         if (horizontalValue < 0)
         {
@@ -88,20 +74,13 @@ public class PlayerMovements : MonoBehaviour
         anim.SetFloat("VerticalSpeed", rgbd.linearVelocity.y);
         anim.SetBool("IsGrounded", CheckIfGrounded());
 
-       if(Input.GetKeyDown(KeyCode.LeftShift) && canDash){
-        StartCoroutine(Dash());
-       }
+       
     }
 
 
 
     private void FixedUpdate()
     {
-        if (isDashing){
-        return;
-        }
-
-
         if(!canMove)
         {
             return;
@@ -152,40 +131,6 @@ public class PlayerMovements : MonoBehaviour
         audioSource.PlayOneShot(jumpSounds[randomvalue], 0.5f);
         Instantiate(dustParticles, transform.position, dustParticles.transform.localRotation);
     }
-
-
-
-
-   private IEnumerator Dash()
-{
-    canDash = false;
-    isDashing = true;
-    float originalGravity = rgbd.gravityScale;
-    rgbd.gravityScale = 0f;
-    rgbd.linearVelocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-    tr.emitting = true;
-    yield return new WaitForSeconds(dashingTime);
-    tr.emitting = false;
-    rgbd.gravityScale = originalGravity;
-    isDashing = false;
-    yield return new WaitForSeconds(dashingCooldown);
-    canDash = true;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public void TakeDamage( int damageAmount)
     {
@@ -286,5 +231,6 @@ public class PlayerMovements : MonoBehaviour
             other.transform.SetParent(null);
         }
     }
+
 
 }

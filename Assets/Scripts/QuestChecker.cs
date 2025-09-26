@@ -3,38 +3,56 @@ using UnityEngine.SceneManagement;
 
 public class QuestChecker : MonoBehaviour
 {
+    [SerializeField] private GameObject dialogueBox, finishText, incompleteText;
     [SerializeField] private int questGoal = 20;
+    [SerializeField] private int diamondGoal = 1;
     [SerializeField] private int levelToLoad;
-    [SerializeField] private Animator doorAnimator;
-    
-    // Remove the openAnimationName since we'll use a trigger instead
+
     private bool levelIsLoading = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !levelIsLoading)
+        if (other.CompareTag("Player"))
         {
             PlayerMovements player = other.GetComponent<PlayerMovements>();
-            if (player != null && player.coinsCollected >= questGoal)
-            {
-                OpenDoor();
-                levelIsLoading = true;
-                Invoke("LoadNextLevel", 2.0f);
-            }
-        }
-    }
+            PlayerInventory inventory = other.GetComponent<PlayerInventory>();
 
-    private void OpenDoor()
-    {
-        if (doorAnimator != null)
-        {
-            // Use SetTrigger instead of Play to trigger the animation transition
-            doorAnimator.SetTrigger("OpenDoor");
+            if (player != null && inventory != null)
+            {
+                if (player.coinsCollected >= questGoal &&
+                    player.diamondsCollected >= diamondGoal &&
+                    inventory.HasMap())
+                {
+                    dialogueBox.SetActive(true);
+                    finishText.SetActive(true);
+
+                    if (!levelIsLoading)
+                    {
+                        levelIsLoading = true;
+                        Invoke(nameof(LoadNextLevel), 2f); // wait 2 seconds
+                    }
+                }
+                else
+                {
+                    dialogueBox.SetActive(true);
+                    incompleteText.SetActive(true);
+                }
+            }
         }
     }
 
     private void LoadNextLevel()
     {
         SceneManager.LoadScene(levelToLoad);
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && !levelIsLoading)
+        {
+            dialogueBox.SetActive(false);
+            finishText.SetActive(false);
+            incompleteText.SetActive(false);
+        }
     }
 }
