@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Sprites/Pirate Ship/Sprites/Decorations/Candle.meta
 guid: 1847b5dd4515e2a4b8e332a1690e885b
+=======
+guid: 2ceddd82c2a72483b985b64c2e19bd6e
+>>>>>>> main:Assets/Prefabs/Spikes/Candle.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

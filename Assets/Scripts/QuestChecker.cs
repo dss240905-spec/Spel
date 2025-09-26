@@ -3,56 +3,54 @@ using UnityEngine.SceneManagement;
 
 public class QuestChecker : MonoBehaviour
 {
-    [SerializeField] private GameObject dialogueBox, finishText, incompleteText;
+    [Header("Quest Settings")]
+    [Tooltip("Number of coins or diamonds required to finish the quest")]
     [SerializeField] private int questGoal = 20;
-    [SerializeField] private int diamondGoal = 1;
+
+    [Tooltip("Set this to true if the quest should require diamonds instead of coins")]
+    [SerializeField] private bool requiresDiamonds = false;
+
+    [Header("Level Settings")]
     [SerializeField] private int levelToLoad;
+
+    [Header("Door Settings")]
+    [SerializeField] private Animator doorAnimator;
 
     private bool levelIsLoading = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !levelIsLoading)
         {
             PlayerMovements player = other.GetComponent<PlayerMovements>();
-            PlayerInventory inventory = other.GetComponent<PlayerInventory>();
-
-            if (player != null && inventory != null)
+            if (player != null)
             {
-                if (player.coinsCollected >= questGoal &&
-                    player.diamondsCollected >= diamondGoal &&
-                    inventory.HasMap())
-                {
-                    dialogueBox.SetActive(true);
-                    finishText.SetActive(true);
+                int playerProgress = requiresDiamonds ? player.diamondsCollected : player.coinsCollected;
 
-                    if (!levelIsLoading)
-                    {
-                        levelIsLoading = true;
-                        Invoke(nameof(LoadNextLevel), 2f); // wait 2 seconds
-                    }
+                if (playerProgress >= questGoal)
+                {
+                    OpenDoor();
+                    levelIsLoading = true;
+                    Invoke(nameof(LoadNextLevel), 2.0f);
                 }
                 else
                 {
-                    dialogueBox.SetActive(true);
-                    incompleteText.SetActive(true);
+                    Debug.Log("You haven't collected enough yet!");
                 }
             }
+        }
+    }
+
+    private void OpenDoor()
+    {
+        if (doorAnimator != null)
+        {
+            doorAnimator.SetTrigger("OpenDoor");
         }
     }
 
     private void LoadNextLevel()
     {
         SceneManager.LoadScene(levelToLoad);
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player") && !levelIsLoading)
-        {
-            dialogueBox.SetActive(false);
-            finishText.SetActive(false);
-            incompleteText.SetActive(false);
-        }
     }
 }

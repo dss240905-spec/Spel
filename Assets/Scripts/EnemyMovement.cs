@@ -1,111 +1,162 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyMovement : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] private float moveSpeed = 2.0f;
-    [SerializeField] private float bounciness = 100;
+    private bool canMove = true;
+    [SerializeField] private SpriteRenderer rend; // Assign in Inspector for flashing
+
+    [Header("Stats")]
+    [SerializeField] private int maxHealth = 1;
+    private int currentHealth;
+
+    [Header("Boss Settings")]
+    [SerializeField] private bool isBoss = false; // Check this for the boss
+    [SerializeField] private GameObject doorToOpen; // Assign the door in Inspector
+
+    [Header("Bounce/Knockback")]
+    [SerializeField] private float bounciness = 100f;
     [SerializeField] private float knockbackForce = 200f;
     [SerializeField] private float upwardForce = 100f;
     [SerializeField] private int damageGiven = 1;
-    [SerializeField] private int maxHealth = 7;
-    private int currentHealth;
-    private SpriteRenderer rend;
-    private bool canMove = true;
+
+    [Header("Flash Settings")]
+    [SerializeField] private Color flashColor = Color.white;
+    [SerializeField] private float flashDuration = 0.2f;
+
+    [SerializeField] private AudioSource audioSource;
+
     private void Start()
     {
-        rend = GetComponent<SpriteRenderer>();
-       
-    
-        rend = GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
+
+    rend = GetComponent<SpriteRenderer>();
+    audioSource = GetComponent<AudioSource>();
+    
+    canMove = true;
+        if (rend == null)
+            rend = GetComponent<SpriteRenderer>();
+    
     }
 
-    void FixedUpdate()
+
+    private void FixedUpdate()
     {
-      transform.Translate(new Vector2(moveSpeed,0) *Time.deltaTime);
-        if (!canMove)
-            return;
-        if (moveSpeed > 0)
-        {
-            rend.flipX = false;
-        }
-        if (moveSpeed < 0) 
-        {
-            rend.flipX = true;
-        }
+        if (!canMove) return;
+
+        // Move horizontally
+        transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
+
+        // Flip sprite based on direction
+        if (rend != null)
+            rend.flipX = moveSpeed < 0;
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.gameObject.CompareTag("EnemyBlock"))
+        // Reverse direction when hitting walls or other enemies
+        if (collision.gameObject.CompareTag("EnemyBlock") || collision.gameObject.CompareTag("Enemy"))
         {
             moveSpeed = -moveSpeed;
         }
 
-        if (other.gameObject.CompareTag("Enemy"))
+        // Damage the player
+        if (collision.gameObject.CompareTag("Player"))
         {
-            moveSpeed = -moveSpeed;
-        }
-        if (other.gameObject.CompareTag("Player"))
-        {
-            PlayerAttacks playerAttack = other.gameObject.GetComponent<PlayerAttacks>();
-
-            // Only damage player if they are NOT attacking
-            if (playerAttack == null || !playerAttack.IsAttacking)
+            PlayerMovements player = collision.gameObject.GetComponent<PlayerMovements>();
+            if (player != null)
             {
-                other.gameObject.GetComponent<PlayerMovements>().TakeDamage(damageGiven);
-
-                if (other.transform.position.x > transform.position.x)
-                {
-                    other.gameObject.GetComponent<PlayerMovements>().TakeKnockBack(knockbackForce, upwardForce);
-                }
-                else
-                {
-                    other.gameObject.GetComponent<PlayerMovements>().TakeKnockBack(-knockbackForce, upwardForce);
-                }
+                player.TakeDamage(1);
+                float direction = collision.transform.position.x > transform.position.x ? 1 : -1;
+                player.TakeKnockBack(200f * direction, 100f);
             }
         }
-
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player")) 
         {
             other.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(other.GetComponent<Rigidbody2D>().linearVelocity.x, 0);
             other.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, bounciness));
+
             GetComponent<Animator>().SetTrigger("Hit");
-            GetComponent<BoxCollider2D>().enabled = false;
+
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
+
+            
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<Rigidbody2D>().gravityScale = 0;
             GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             canMove = false;
-            Destroy(gameObject,0.5f);
 
+            Destroy(gameObject,0.5f);
         }
+
+        // Bounce the player when jumping on the enemy
+        Rigidbody2D playerRb = other.GetComponent<Rigidbody2D>();
+        if (playerRb != null)
+        {
+            playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, 0);
+            playerRb.AddForce(new Vector2(0, bounciness), ForceMode2D.Impulse);
+        }
+
+        // Take damage
+        TakeDamage(1);
     }
-    public void TakeDamage(int damage)
+
+    private void TakeDamage(int damage)
     {
         currentHealth -= damage;
+
+        Flash(); // Flash once per hit
 
         if (currentHealth <= 0)
         {
             Die();
         }
-        else
-        {
-            // Optional: play "hit" animation or flash red
-            GetComponent<Animator>().SetTrigger("Hit");
-        }
     }
+
     private void Die()
     {
-        // Play animation, disable movement
         canMove = false;
 
-        // Optional: disable colliders so player can’t bump into dead enemy
-        GetComponent<Collider2D>().enabled = false;
+        // Disable colliders
+        BoxCollider2D col = GetComponent<BoxCollider2D>();
+        if (col != null) col.enabled = false;
 
-        // Destroy after a short delay
-        Destroy(gameObject, 0.5f);
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.gravityScale = 0;
+            rb.linearVelocity = Vector2.zero;
+        }
+
+        // Only open/destroy the door if this is the boss
+        if (isBoss && doorToOpen != null)
+        {
+            Destroy(doorToOpen); // or trigger an Animator instead
+        }
+
+        Destroy(gameObject, 0.5f); // destroy the enemy after short delay
+    }
+
+    private void Flash()
+    {
+        if (rend != null)
+            StartCoroutine(FlashRoutine());
+    }
+
+    private IEnumerator FlashRoutine()
+    {
+        Color originalColor = rend.color;
+        rend.color = flashColor; // turn white
+        yield return new WaitForSeconds(flashDuration);
+        rend.color = originalColor; // back to normal
     }
 }

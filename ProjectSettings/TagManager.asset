@@ -13,6 +13,7 @@ TagManager:
   - Diamond
   - SilverCoin
   - Foreground
+  - Tree
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - EnemyBlock
   - Player
   - Platform
-  - 
+  - Foreground
   - 
   - 
   - 
@@ -47,11 +48,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: BGImage
-    uniqueID: 200365503
-    locked: 0
   - name: Background
     uniqueID: 2975845801
+    locked: 0
+  - name: BGImage
+    uniqueID: 200365503
     locked: 0
   - name: Water Reflect Backgroound
     uniqueID: 241693821
@@ -70,6 +71,10 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 705698721
+    uniqueID: 1137649397
+    locked: 0
+  - name: Trees
+    uniqueID: 3238278193
     locked: 0
   m_RenderingLayers:
   - Default
